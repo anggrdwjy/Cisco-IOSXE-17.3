@@ -141,7 +141,7 @@ spanning-tree bpdufilter enable
 
 MPLS Service :
 ---------------
-MPLS L3VPN
+MPLS L3VPN Service
 ```
 Example :
 #Configuration Virtual Routing Forwarding
@@ -159,7 +159,7 @@ no shutdown
 
 #Configuration Switch Virtual Interface
 service instance 111 ethernet
-description WAN-111
+description MPLS_L3VPN
 encapsulation dot1q 111
 rewrite ingress tag pop 1 symmetric
 bridge-domain 111
@@ -176,10 +176,20 @@ neighbor 21.21.21.21 encapsulation mpls
 
 #Configuration Switch Virtual Interface
 service instance 444 ethernet
-description VPLS 444 TEST
+description VPLS_SERVICE
 encapsulation dot1q 444
 rewrite ingress tag pop 1 symmetric
 bridge-domain 444
+```
+MPLS L2VPN Pseudowire
+```
+service instance 666 ethernet
+description MPLS_L2VPN
+encapsulation dot1q 666
+rewrite ingress tag pop 1 symmetric
+bridge-domain 666
+xconnect 11.11.11.11 666 encapsulation mpls
+
 ```
 
 
