@@ -57,27 +57,6 @@ mpls ip
 mpls label protocol ldp
 ```
 
-MPLS LDP Configuration :
----------------
-Configuration MPLS LDP
-```
-mpls label protocol ldp
-mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
-mpls ldp graceful-restart
-no mpls ldp advertise-labels
-mpls ldp advertise-labels for ACL-MPLS-LDP
-```
-
-Access Control List For LDP :
----------------
-Configuration ACL For MPLS LDP
-```
-ip access-list standard ACL-MPLS-LDP
-10 permit [IP_HOST_ALLOW}
-20 permit [IP_HOST_ALLOW}
-30 permit [IP_HOST_ALLOW}
-```
-
 Routing OSPF Configuration :
 ---------------
 Configuration Routing OSPF Single Area (Internal Router) or Backbone Area (Area 0)
@@ -103,6 +82,27 @@ network [IP_LOOPBACK] 0.0.0.0 area [OSPF_AREA_A]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_A]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_B]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_C]
+```
+
+MPLS LDP Configuration :
+---------------
+Configuration MPLS LDP
+```
+mpls label protocol ldp
+mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
+mpls ldp graceful-restart
+no mpls ldp advertise-labels
+mpls ldp advertise-labels for ACL-MPLS-LDP
+```
+
+Access Control List For LDP :
+---------------
+Configuration ACL For MPLS LDP
+```
+ip access-list standard ACL-MPLS-LDP
+10 permit [IP_HOST_ALLOW}
+20 permit [IP_HOST_ALLOW}
+30 permit [IP_HOST_ALLOW}
 ```
 
 Routing BGP to Route Reflector :
