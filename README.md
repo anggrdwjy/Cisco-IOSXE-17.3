@@ -60,7 +60,7 @@ MPLS LDP Configuration :
 Configuration MPLS LDP
 ```
 mpls label protocol ldp
-mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD
+mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
 mpls ldp graceful-restart
 no mpls ldp advertise-labels
 mpls ldp advertise-labels for ACL-MPLS-LDP
@@ -78,7 +78,7 @@ ip access-list standard ACL-MPLS-LDP
 
 Routing OSPF Configuration :
 ---------------
-Configuration Routing OSPF Single Area / Backbone
+Configuration Routing OSPF Single Area (Internal Router) or Backbone Area (Area 0)
 ```
 router ospf [OSPF-ID]
 router-id [IP_LOOPBACK]
@@ -89,7 +89,7 @@ no passive-interface GigabitEthernet2 <- Active Port
 network [IP_LOOPBACK] 0.0.0.0 area [OSPF_AREA]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA]
 ```
-Configuration Routing OSPF Multiarea
+Configuration Routing OSPF Multiarea (Area Border Router)
 ```
 router ospf [OSPF-ID]
 router-id [IP_LOOPBACK]
@@ -103,28 +103,25 @@ network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_B]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_C]
 ```
 
-Routing BGP :
+Routing I-BGP to Route Reflector :
 ---------------
-router bgp 65000
-bgp router-id 1.1.1.1
+```
+router bgp [AS_NUMBER]
+bgp router-id [IP_LOOPBACK]
 bgp log-neighbor-changes
 bgp graceful-restart
 no bgp default ipv4-unicast
-neighbor 4.4.4.4 remote-as 65000
-neighbor 4.4.4.4 description to-RR1
-neighbor 4.4.4.4 password baseball
-neighbor 4.4.4.4 update-source Loopback0
-neighbor 6.6.6.6 remote-as 65000
-neighbor 6.6.6.6 description to-RR2
-neighbor 6.6.6.6 password baseball
-neighbor 6.6.6.6 update-source Loopback0
-!
+neighbor [IP_ROUTE_REFLECTOR] remote-as [AS_NUMBER_ROUTE_REFLECTOR]
+neighbor [IP_ROUTE_REFLECTOR] description [TO_ROUTE_REFLECTOR]
+neighbor [IP_ROUTE_REFLECTOR] password [PASSWORD]
+neighbor [IP_ROUTE_REFLECTOR] update-source Loopback0
+```
+```
 address-family vpnv4
-neighbor 4.4.4.4 activate
-neighbor 4.4.4.4 send-community both
-neighbor 6.6.6.6 activate
-neighbor 6.6.6.6 send-community both
+neighbor [IP_ROUTE_REFLECTOR] activate
+neighbor [IP_ROUTE_REFLECTOR] send-community both
 exit-address-family
+```
 
 
 
