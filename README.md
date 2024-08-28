@@ -1,4 +1,4 @@
-# How To Configuration 
+# How To Configuration Router Cisco IOS-XE 17.3
 
 Basic Configuration :
 ---------------
@@ -6,19 +6,19 @@ Activate Password Encrypt
 ```
 service password-encryption
 ```
-Create Hostname
+Configuration Hostname
 ```
-hostname [HOSTNAME DEVICES]
+hostname [HOSTNAME_DEVICES]
 ```
 Enable Password For Global Configuration
 ```
 enable secret [PASSWORD]
 ```
-Create Username and Password For Login
+Configuration Username and Password For Login
 ```
-username [USER] privilege 15 secret [PASSWORD]
+username [USERNAME] privilege 15 secret [PASSWORD]
 ```
-Create Privillage Login
+Configuration Privillage Login
 ```
 line vty 0 4
 login local
@@ -28,102 +28,80 @@ transport output telnet ssh
 
 Interface Configuration :
 ---------------
+Configuration Loopback
+```
 interface Loopback0
- ip address 1.1.1.1 255.255.255.255
- ip ospf network point-to-point
-!
+ip address [IP_ADDRESS] [NETMASK]
+ip ospf network point-to-point
+```
+Configuration Port Interface
+```
 interface GigabitEthernet1
- description Link to 10-PE
- mtu 8900
- ip address 172.0.1.2 255.255.255.252
- ip ospf authentication message-digest
- ip ospf message-digest-key 1 md5 7 1415131809062B2728
- ip ospf network point-to-point
- ip ospf dead-interval 15
- ip ospf hello-interval 5
- ip ospf mtu-ignore
- ip ospf cost 1
- load-interval 30
- negotiation auto
- cdp enable
- mpls ip
- mpls label protocol ldp
- no mop enabled
- no mop sysid
-!
-interface GigabitEthernet2
- description Link to 20-PE
- mtu 8900
- ip address 172.0.2.1 255.255.255.252
- ip ospf authentication message-digest
- ip ospf message-digest-key 1 md5 7 0006121501590A0A03
- ip ospf network point-to-point
- ip ospf dead-interval 15
- ip ospf hello-interval 5
- ip ospf mtu-ignore
- ip ospf cost 1
- load-interval 30
- negotiation auto
- cdp enable
- mpls ip
- mpls label protocol ldp
- no mop enabled
- no mop sysid
-!
-interface GigabitEthernet3
- mtu 2000
- no ip address
- ip ospf authentication message-digest
- ip ospf message-digest-key 1 md5 7 130716010E0E052627
- ip ospf network point-to-point
- ip ospf dead-interval 15
- ip ospf hello-interval 5
- ip ospf mtu-ignore
- ip ospf cost 65000
- load-interval 30
- shutdown
- negotiation auto
- cdp enable
- mpls ip
- mpls label protocol ldp
- no mop enabled
- no mop sysid
-!
-
+no shutdown
+description "Link to Neighbor"
+mtu [1998-9200]
+ip address  [IP_ADDRESS] [NETMASK]
+ip ospf authentication message-digest
+ip ospf message-digest-key 1 md5 [PASSWORD]
+ip ospf network point-to-point
+ip ospf dead-interval 15
+ip ospf hello-interval 5
+ip ospf mtu-ignore
+ip ospf cost [1-65000]
+load-interval 30
+negotiation auto
+cdp enable
+mpls ip
+mpls label protocol ldp
+```
 
 MPLS LDP Configuration :
 ---------------
+Configuration MPLS LDP
+```
 mpls label protocol ldp
-mpls ldp neighbor 10.10.10.10 password baseball
-mpls ldp neighbor 20.20.20.20 password baseball
+mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD
 mpls ldp graceful-restart
 no mpls ldp advertise-labels
 mpls ldp advertise-labels for ACL-MPLS-LDP
-
+```
 
 Access Control List For LDP :
 ---------------
+Configuration ACL For MPLS LDP
+```
 ip access-list standard ACL-MPLS-LDP
-10 permit 11.11.11.11
-20 permit 10.10.10.10
-30 permit 1.1.1.1
-40 permit 20.20.20.20
-50 permit 21.21.21.21
-60 permit 4.4.4.4
-
+10 permit [IP_HOST_ALLOW}
+20 permit [IP_HOST_ALLOW}
+30 permit [IP_HOST_ALLOW}
+```
 
 Routing OSPF Configuration :
 ---------------
-router ospf 100
-router-id 1.1.1.1
+Configuration Routing OSPF Single Area / Backbone
+```
+router ospf [OSPF-ID]
+router-id [IP_LOOPBACK]
 nsf cisco
-passive-interface default
-no passive-interface GigabitEthernet1
-no passive-interface GigabitEthernet2
-network 1.1.1.1 0.0.0.0 area 0
-network 172.0.1.2 0.0.0.0 area 0
-network 172.0.2.1 0.0.0.0 area 0
-
+passive-interface default <- Passive Port
+no passive-interface GigabitEthernet1 <- Active Port
+no passive-interface GigabitEthernet2 <- Active Port
+network [IP_LOOPBACK] 0.0.0.0 area [OSPF_AREA]
+network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA]
+```
+Configuration Routing OSPF Multiarea
+```
+router ospf [OSPF-ID]
+router-id [IP_LOOPBACK]
+nsf cisco
+passive-interface default <- Passive Port
+no passive-interface GigabitEthernet1 <- Active Port
+no passive-interface GigabitEthernet2 <- Active Port
+network [IP_LOOPBACK] 0.0.0.0 area [OSPF_AREA_A]
+network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_A]
+network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_B]
+network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_C]
+```
 
 Routing BGP :
 ---------------
