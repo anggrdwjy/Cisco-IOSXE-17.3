@@ -1,8 +1,9 @@
-# How To Configuration Router Cisco IOS-XE 17.3
+# How To Configuration Router Cisco IOS-XE 17.3.2
+Hi Engineer, Saya Membuat Tutorial Cara Konfigurasi Router Cisco Versi IOS-Xe 17.3.2. Pada Kesempatan ini saya menggunakan PNETLAB dengan spesifikasi laptop Intel Core i5 Gen 10th 6-Core, RAM 32GB, Free Disk 200GB untuk menjalankannya. Jika mengalami kendala, dengan senang hati hubungi saya melalui email : [anggarda.wijaya](mailto:anggarda.wijaya@outlook.com) atau linkedin : [anggarda-wijaya410](https://www.linkedin.com/in/anggarda-wijaya410)
 
 Full Video Tutorial Cisco Router IOS-XE and Cisco Switch vIOS :
 ---------------
-- [Cisco Router IOS-XE 17.3 Routing OSPF, MPLS LDP, BGP and MPLS Service](https://www.youtube.com/playlist?list=PLy064HwEq9IzN4zMz1rtCb__-eBVGk_Gh)
+- [Cisco Router IOS-XE 17.3.2 Routing OSPF, MPLS LDP, BGP and MPLS Service](https://www.youtube.com/playlist?list=PLy064HwEq9IzN4zMz1rtCb__-eBVGk_Gh)
 - [Cisco Switch vIOS Configuration VLAN, Port Trunk and Port Access](https://youtube.com/playlist?list=PLy064HwEq9Iwrd5SHUB4PWZafL7lUcCJg&si=sDOHQqlU43nWHvMD)
 
 Basic Configuration :
