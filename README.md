@@ -125,6 +125,20 @@ neighbor [IP_ROUTE_REFLECTOR] send-community both
 exit-address-family
 ```
 
+Basic Configuration Trunk to Service :
+---------------
+Configuration Trunk
+```
+interface GigabitEthernet2
+no shutdown
+description Trunk to Service
+mtu 1900
+no ip address
+load-interval 30
+negotiation auto
+spanning-tree bpdufilter enable
+```
+
 MPLS Service :
 ---------------
 MPLS L3VPN
@@ -149,6 +163,23 @@ description WAN-111
 encapsulation dot1q 111
 rewrite ingress tag pop 1 symmetric
 bridge-domain 111
+```
+VPLS (Virtual Private LAN Services)
+```
+Example :
+#Configuration VPLS
+l2 vfi VFI-444 manual
+vpn id 444
+bridge-domain 444
+mtu 1900
+neighbor 21.21.21.21 encapsulation mpls
+
+#Configuration Switch Virtual Interface
+service instance 444 ethernet
+description VPLS 444 TEST
+encapsulation dot1q 444
+rewrite ingress tag pop 1 symmetric
+bridge-domain 444
 ```
 
 
