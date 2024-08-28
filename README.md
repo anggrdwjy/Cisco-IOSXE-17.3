@@ -125,7 +125,7 @@ neighbor [IP_ROUTE_REFLECTOR] send-community both
 exit-address-family
 ```
 
-Basic Configuration Trunk to Service :
+Configuration Trunk to Service :
 ---------------
 Configuration Trunk
 ```
