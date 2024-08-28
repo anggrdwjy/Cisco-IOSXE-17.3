@@ -103,8 +103,9 @@ network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_B]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_C]
 ```
 
-Routing I-BGP to Route Reflector :
+Routing BGP to Route Reflector :
 ---------------
+Configuration Routing BGP to RR
 ```
 router bgp [AS_NUMBER]
 bgp router-id [IP_LOOPBACK]
@@ -116,6 +117,7 @@ neighbor [IP_ROUTE_REFLECTOR] description [TO_ROUTE_REFLECTOR]
 neighbor [IP_ROUTE_REFLECTOR] password [PASSWORD]
 neighbor [IP_ROUTE_REFLECTOR] update-source Loopback0
 ```
+Activate BGP VPNV4
 ```
 address-family vpnv4
 neighbor [IP_ROUTE_REFLECTOR] activate
