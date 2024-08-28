@@ -1,5 +1,9 @@
 # How To Configuration Router Cisco IOS-XE 17.3
 
+Full Video Tutorial Cisco Router IOS-XE :
+---------------
+Youtube : [Cisco Router IOS-XE 17.3 Routing OSPF, MPLS LDP, BGP and MPLS Service](https://www.youtube.com/playlist?list=PLy064HwEq9IzN4zMz1rtCb__-eBVGk_Gh)
+
 Basic Configuration :
 ---------------
 Basic Configuration
@@ -188,6 +192,3 @@ bridge-domain 666
 xconnect 11.11.11.11 666 encapsulation mpls
 
 ```
-Full Tutorial Router Cisco MPLS Configuration and Implementation :
----------------
-Youtube [Cisco Router IOS-XE 17.3 Routing OSPF, MPLS LDP and BGP](https://www.youtube.com/playlist?list=PLy064HwEq9IzN4zMz1rtCb__-eBVGk_Gh)
