@@ -125,6 +125,33 @@ neighbor [IP_ROUTE_REFLECTOR] send-community both
 exit-address-family
 ```
 
+MPLS Service :
+---------------
+MPLS L3VPN
+```
+Example :
+#Configuration Virtual Routing Forwarding
+ip vrf WAN-111
+rd 65000:10100
+route-target export 65000:10200
+route-target import 65000:10100
+
+#Configuration Bridge-Domain Interface
+interface BDI111
+description WAN-111
+ip vrf forwarding WAN-111
+ip address 10.100.0.1 255.255.255.252
+no shutdown
+
+#Configuration Switch Virtual Interface
+service instance 111 ethernet
+description WAN-111
+encapsulation dot1q 111
+rewrite ingress tag pop 1 symmetric
+bridge-domain 111
+```
+
+
 
 
  
