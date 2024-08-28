@@ -1,7 +1,7 @@
 # How To Configuration Router Cisco IOS-XE 17.3.2
 Hi Engineer, I Create a Tutorial on How to Configure a Cisco Router Version IOS-XE 17.3.2. On this occasion I use PNETLAB with a laptop specification of Intel Core i5 Gen 10th 6-Core, 32GB RAM, 200GB Free Disk to run it.
 
-If you experience problems, please contact via email: [Anggarda Saputra Wijaya](mailto:anggarda.wijaya@outlook.com) or linkedin: [Anggarda Saputra Wijaya](https://www.linkedin.com/in/anggarda-wijaya410)
+If you experience problems, please contact via email: [anggarda.wijaya@outlook.com](mailto:anggarda.wijaya@outlook.com) or linkedin: [Anggarda Saputra Wijaya](https://www.linkedin.com/in/anggarda-wijaya410)
 
 Full Video Tutorial Cisco Router IOS-XE and Cisco Switch vIOS :
 ---------------
