@@ -2,24 +2,21 @@
 
 Basic Configuration :
 ---------------
-Activate Password Encrypt
+Basic Configuration
 ```
+#Active Password Encryption
 service password-encryption
-```
-Configuration Hostname
-```
+
+#Configuration Hostname
 hostname [HOSTNAME_DEVICES]
-```
-Enable Password For Global Configuration
-```
+
+#Enable Password For Global Configuration
 enable secret [PASSWORD]
-```
-Configuration Username and Password For Login
-```
+
+#Configuration Username and Password For Login
 username [USERNAME] privilege 15 secret [PASSWORD]
-```
-Configuration Privillage Login
-```
+
+#Configuration Privillage Login
 line vty 0 4
 login local
 transport input telnet ssh
