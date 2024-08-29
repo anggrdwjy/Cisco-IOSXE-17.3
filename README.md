@@ -217,7 +217,7 @@ l2 vfi VFI-444 manual
 vpn id 444
 bridge-domain 444
 mtu 1900
-neighbor 21.21.21.21 encapsulation mpls
+neighbor 11.11.11.11 encapsulation mpls
 !
 service instance 444 ethernet
 description VPLS_SERVICE
