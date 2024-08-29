@@ -127,7 +127,7 @@ exit-address-family
 Configuration Route Reflector to NODE Client
 ```
 router bgp [AS_NUMBER]
-bgp router-id [IP_LOOPBACK]
+bgp router-id [IP_LOOPBACK_RR]
 bgp log-neighbor-changes
 bgp graceful-restart
 no bgp default ipv4-unicast
