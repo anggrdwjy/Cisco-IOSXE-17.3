@@ -107,23 +107,46 @@ ip access-list standard ACL-MPLS-LDP
 
 Routing BGP to Route Reflector :
 ---------------
-Configuration Routing BGP to RR
+Configuration NODE Client to Route Reflector
 ```
 router bgp [AS_NUMBER]
 bgp router-id [IP_LOOPBACK]
 bgp log-neighbor-changes
 bgp graceful-restart
 no bgp default ipv4-unicast
-neighbor [IP_ROUTE_REFLECTOR] remote-as [AS_NUMBER_ROUTE_REFLECTOR]
+neighbor [IP_ROUTE_REFLECTOR] remote-as [AS_NUMBER]
 neighbor [IP_ROUTE_REFLECTOR] description [TO_ROUTE_REFLECTOR]
 neighbor [IP_ROUTE_REFLECTOR] password [PASSWORD]
 neighbor [IP_ROUTE_REFLECTOR] update-source Loopback0
-```
-Activate BGP VPNV4
-```
+!
 address-family vpnv4
 neighbor [IP_ROUTE_REFLECTOR] activate
 neighbor [IP_ROUTE_REFLECTOR] send-community both
+exit-address-family
+```
+Configuration Route Reflector to NODE Client
+```
+router bgp [AS_NUMBER]
+bgp router-id [IP_LOOPBACK]
+bgp log-neighbor-changes
+bgp graceful-restart
+no bgp default ipv4-unicast
+neighbor RR-CLIENT peer-group
+neighbor RR-CLIENT remote-as [AS_NUMBER]
+neighbor RR-CLIENT password [PASSWORD]
+neighbor RR-CLIENT update-source Loopback0
+neighbor [IP_RR_CLIENT_A] peer-group RR-CLIENT
+neighbor [IP_RR_CLIENT_B] peer-group RR-CLIENT
+neighbor [IP_RR_CLIENT_B] peer-group RR-CLIENT
+!
+address-family vpnv4
+bgp slow-peer detection
+neighbor RR-CLIENT send-community both
+neighbor RR-CLIENT route-reflector-client
+neighbor RR-CLIENT slow-peer split-update-group dynamic
+neighbor [IP_RR_CLIENT_A] activate
+neighbor [IP_RR_CLIENT_B] activate
+neighbor [IP_RR_CLIENT_C] activate
 exit-address-family
 ```
 
@@ -147,6 +170,7 @@ MPLS L3VPN Service
 ```
 Example :
 #Configuration L3VPN and Service Instance
+
 @NODE-A
 ip vrf WAN-111
 rd 65000:10100
@@ -187,6 +211,7 @@ VPLS (Virtual Private LAN Services)
 ```
 Example :
 #Configuration VPLS and Service Instance
+
 @NODE-A
 l2 vfi VFI-444 manual
 vpn id 444
@@ -217,6 +242,7 @@ MPLS L2VPN Pseudowire
 ```
 Example :
 #Configuration L2VPN and Service Instance
+
 @NODE-A
 service instance 666 ethernet
 description MPLS_L2VPN
