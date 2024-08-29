@@ -225,7 +225,7 @@ encapsulation dot1q 444
 rewrite ingress tag pop 1 symmetric
 bridge-domain 444
 
-@NODE-A
+@NODE-B
 l2 vfi VFI-444 manual
 vpn id 444
 bridge-domain 444
