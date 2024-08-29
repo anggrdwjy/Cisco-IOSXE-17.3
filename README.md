@@ -1,5 +1,4 @@
 # How To Configuration Router Cisco IOS-XE 17.3.2
-Hi Engineer, the specifications needed to run this network lab are Intel Core i5 Gen 10th 6-Core, RAM 32GB, Free Space 200GB.
 
 Full Demo Router IOS-XE and Cisco Switch vIOS :
 ---------------
