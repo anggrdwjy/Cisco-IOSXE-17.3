@@ -146,20 +146,37 @@ MPLS Service :
 MPLS L3VPN Service
 ```
 Example :
-#Configuration Virtual Routing Forwarding
+#Configuration L3VPN and Service Instance
+@NODE-A
 ip vrf WAN-111
 rd 65000:10100
 route-target export 65000:10200
 route-target import 65000:10100
-
-#Configuration Bridge-Domain Interface
+!
 interface BDI111
 description WAN-111
 ip vrf forwarding WAN-111
 ip address 10.100.0.1 255.255.255.252
 no shutdown
+!
+service instance 111 ethernet
+description MPLS_L3VPN
+encapsulation dot1q 111
+rewrite ingress tag pop 1 symmetric
+bridge-domain 111
 
-#Configuration Switch Virtual Interface
+@NODE-B
+ip vrf WAN-111
+rd 65000:10100
+route-target export 65000:10100
+route-target import 65000:10200
+!
+interface BDI111
+description WAN-111
+ip vrf forwarding WAN-111
+ip address 10.200.0.1 255.255.255.252
+no shutdown
+!
 service instance 111 ethernet
 description MPLS_L3VPN
 encapsulation dot1q 111
@@ -169,14 +186,27 @@ bridge-domain 111
 VPLS (Virtual Private LAN Services)
 ```
 Example :
-#Configuration VPLS
+#Configuration VPLS and Service Instance
+@NODE-A
 l2 vfi VFI-444 manual
 vpn id 444
 bridge-domain 444
 mtu 1900
 neighbor 21.21.21.21 encapsulation mpls
+!
+service instance 444 ethernet
+description VPLS_SERVICE
+encapsulation dot1q 444
+rewrite ingress tag pop 1 symmetric
+bridge-domain 444
 
-#Configuration Switch Virtual Interface
+@NODE-A
+l2 vfi VFI-444 manual
+vpn id 444
+bridge-domain 444
+mtu 1900
+neighbor 21.21.21.21 encapsulation mpls
+!
 service instance 444 ethernet
 description VPLS_SERVICE
 encapsulation dot1q 444
@@ -185,11 +215,22 @@ bridge-domain 444
 ```
 MPLS L2VPN Pseudowire
 ```
+Example :
+#Configuration L2VPN and Service Instance
+@NODE-A
 service instance 666 ethernet
 description MPLS_L2VPN
 encapsulation dot1q 666
 rewrite ingress tag pop 1 symmetric
 bridge-domain 666
 xconnect 11.11.11.11 666 encapsulation mpls
+
+@NODE-B
+service instance 666 ethernet
+description MPLS_L2VPN
+encapsulation dot1q 666
+rewrite ingress tag pop 1 symmetric
+bridge-domain 666
+xconnect 21.21.21.21 666 encapsulation mpls
 
 ```
