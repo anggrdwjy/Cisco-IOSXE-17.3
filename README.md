@@ -26,6 +26,11 @@ line vty 0 4
 login local
 transport input telnet ssh
 transport output telnet ssh
+
+Verification :
+```
+telnet [IP_ADDRESS]
+ssh [USERNAME]@[IP_ADDRESS]
 ```
 
 Interface Configuration :
@@ -56,6 +61,18 @@ cdp enable
 mpls ip
 mpls label protocol ldp
 ```
+Verification
+```
+show interface [PORT]
+show interface [PORT] | include rate
+show interface [PORT] | include error
+show interface [PORT] | include CRC
+show interface description | include up
+show interface description | include down
+show ip interface brief
+show ip interface brief | include up
+show ip interface brief | include down
+```
 
 Routing OSPF Configuration :
 ---------------
@@ -83,9 +100,23 @@ network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_A]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_B]
 network [IP_POINT_TO_POINT] 0.0.0.0 area [OSPF_AREA_C]
 ```
+Verification
+```
+show running | section router ospf
+show ip ospf interface
+show ip ospf interface brief
+show ip ospf interface neighbor
+```
 
 MPLS LDP Configuration :
 ---------------
+Configuration ACL For MPLS LDP
+```
+ip access-list standard ACL-MPLS-LDP
+10 permit [IP_HOST_ALLOW]
+20 permit [IP_HOST_ALLOW]
+30 permit [IP_HOST_ALLOW]
+```
 Configuration MPLS LDP
 ```
 mpls label protocol ldp
@@ -94,15 +125,11 @@ mpls ldp graceful-restart
 no mpls ldp advertise-labels
 mpls ldp advertise-labels for ACL-MPLS-LDP
 ```
-
-Access Control List For LDP :
----------------
-Configuration ACL For MPLS LDP
+Verification
 ```
-ip access-list standard ACL-MPLS-LDP
-10 permit [IP_HOST_ALLOW}
-20 permit [IP_HOST_ALLOW}
-30 permit [IP_HOST_ALLOW}
+show mpls interface
+show mpls ldp session
+show mpls ldp neighbor
 ```
 
 Routing BGP to Route Reflector :
@@ -148,6 +175,10 @@ neighbor [IP_RR_CLIENT_A] activate
 neighbor [IP_RR_CLIENT_B] activate
 neighbor [IP_RR_CLIENT_C] activate
 exit-address-family
+```
+Verification
+```
+show bgp summary
 ```
 
 Configuration Trunk to Service :
