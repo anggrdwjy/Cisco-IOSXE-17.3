@@ -26,7 +26,7 @@ line vty 0 4
 login local
 transport input telnet ssh
 transport output telnet ssh
-
+```
 Verification :
 ```
 telnet [IP_ADDRESS]
