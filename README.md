@@ -178,6 +178,7 @@ exit-address-family
 ```
 Verification
 ```
+show running | section router bgp
 show bgp summary
 ```
 
@@ -194,6 +195,11 @@ load-interval 30
 negotiation auto
 spanning-tree bpdufilter enable
 ```
+verification
+```
+show interface [PORT_TRUNK]
+show running interface [PORT_TRUNK]
+```
 
 MPLS Service :
 ---------------
@@ -207,6 +213,12 @@ ip vrf WAN-111
 rd 65000:10100
 route-target export 65000:10200
 route-target import 65000:10100
+!
+router bgp 65000
+address-family ipv4 vrf WAN-111
+redistribute connected
+redistribute static
+exit-address-family
 !
 interface BDI111
 description WAN-111
@@ -226,6 +238,12 @@ rd 65000:10100
 route-target export 65000:10100
 route-target import 65000:10200
 !
+router bgp 65000
+address-family ipv4 vrf WAN-111
+redistribute connected
+redistribute static
+exit-address-family
+!
 interface BDI111
 description WAN-111
 ip vrf forwarding WAN-111
@@ -237,6 +255,14 @@ description MPLS_L3VPN
 encapsulation dot1q 111
 rewrite ingress tag pop 1 symmetric
 bridge-domain 111
+
+@Verification
+show running interface bridge-domain [ID_SERVICE]
+show ip interface brief
+show running interface [PORT_TRUNK] | section [ID_SERVICE] ethernet
+show bgp vpnv4 unicast vrf [VRF_LABEL]
+ping vrf [VRF_LABEL] [IP_NEIGHBOR] 
+traceroute vrf [VRF_LABEL] [IP_NEIGHBOR] 
 ```
 VPLS (Virtual Private LAN Services)
 ```
@@ -268,6 +294,12 @@ description VPLS_SERVICE
 encapsulation dot1q 444
 rewrite ingress tag pop 1 symmetric
 bridge-domain 444
+
+@Verification
+show running interface [PORT_TRUNK] | section [ID_SERVICE] ethernet
+show mpls l2transport vc [VPLS-ID]
+show vfi [VPLS-ID]
+show bridge-domain [VPLS_ID]
 ```
 MPLS L2VPN Pseudowire
 ```
@@ -290,4 +322,8 @@ rewrite ingress tag pop 1 symmetric
 bridge-domain 666
 xconnect 21.21.21.21 666 encapsulation mpls
 
+@Verification
+show running interface [PORT_TRUNK] | section [ID_SERVICE] ethernet
+show mpls l2transport vc [L2VPN-ID]
+show bridge-domain [L2VPN_ID]
 ```
