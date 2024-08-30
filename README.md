@@ -256,7 +256,7 @@ encapsulation dot1q 111
 rewrite ingress tag pop 1 symmetric
 bridge-domain 111
 
-@Verification
+#Verification
 show running interface bridge-domain [ID_SERVICE]
 show ip interface brief
 show running interface [PORT_TRUNK] | section [ID_SERVICE] ethernet
@@ -295,7 +295,7 @@ encapsulation dot1q 444
 rewrite ingress tag pop 1 symmetric
 bridge-domain 444
 
-@Verification
+#Verification
 show running interface [PORT_TRUNK] | section [ID_SERVICE] ethernet
 show mpls l2transport vc [VPLS-ID]
 show vfi [VPLS-ID]
@@ -322,7 +322,7 @@ rewrite ingress tag pop 1 symmetric
 bridge-domain 666
 xconnect 21.21.21.21 666 encapsulation mpls
 
-@Verification
+#Verification
 show running interface [PORT_TRUNK] | section [ID_SERVICE] ethernet
 show mpls l2transport vc [L2VPN-ID]
 show bridge-domain [L2VPN_ID]
