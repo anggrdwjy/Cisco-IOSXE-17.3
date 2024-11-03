@@ -318,3 +318,8 @@ load-interval 30
 negotiation auto
 spanning-tree bpdufilter enable
 ```
+
+# Additional Resources
+## Books / Manuals
+  
+## Youtube Playlist
