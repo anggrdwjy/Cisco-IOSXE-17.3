@@ -40,6 +40,39 @@
   * [Youtube Playlist](#Youtube-Playlist)
 ## Command References
 
+| Command | Description |
+| ---- | ----- |
+| show running | show configuration in router |
+| show running interface [PORT] | show configuration interface |
+| show running \| section router ospf | show configuration ospf |
+| show running \| section router bgp | show configuration bgp |
+| show running interface [PORT] | show configuration interface |
+| show running interface [PORT_TRUNK] \| section [ID_SERVICE] ethernet | show configuration service instance |
+| show running interface bridge-domain [ID_SERVICE] | show configuration interface bridge-domain |
+| show interface [PORT_TRUNK] | show interface port trunk |
+| show ip interface brief | show ip all interface |
+| show etherchannel summary | etherchannel summary |
+| show ip ospf interface | show ospf interface |
+| show ip ospf interface brief | show ospf all interface |
+| show ip ospf interface neighbor | show ospf neighbor connected |
+| show bridge-domain [VPLS_ID] | show bridge-domain vpls |
+| show bridge-domain [L2VPN_ID] | show bridge-domain l2vpn |
+| show mpls interface | show mpls interface |
+| show mpls ldp session | show ldp session |
+| show mpls ldp neighbor | show ldp neighbor connected |
+| show mpls l2transport vc [VPLS-ID] | show l2transport virtual connection vpls |
+| show mpls l2transport vc [L2VPN-ID] | show l2transport virtual connection l2 |
+| show vfi [VPLS-ID] | show vpls configuration |
+| show bgp summary | show bgp all connected |
+| show bgp vpnv4 unicast vrf [VRF_LABEL] | show vrf MP-BGP configuration |
+| telnet [IP_ADDRESS] | telnet access to router |
+| ssh [USERNAME]@[IP_ADDRESS] | ssh access to router |
+| ping vrf [VRF_LABEL] [IP_NEIGHBOR] | ping vpn to destination |
+| traceroute vrf [VRF_LABEL] [IP_NEIGHBOR] | traceroute vpn to destination |
+| copy running startup-config | save configuration in startup router |
+| write | save configuration |
+
+
 # Basic Configuration
 ## Hostname
 ```
