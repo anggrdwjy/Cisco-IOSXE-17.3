@@ -76,8 +76,23 @@ mpls ip
 mpls label protocol ldp
 ```
 
-# LACP
-## LACP
+# LACP (Link Aggregation Control Protocol)
+## LACP 
+Port Channel Configuration
+```
+interface Port-channel1
+ip address 192.168.1.1 255.255.255.0
+
+interface GigabitEthernet0/1
+switchport
+switchport mode trunk
+channel-group 1 mode active
+
+interface GigabitEthernet0/2
+switchport
+switchport mode trunk
+channel-group 1 mode active
+```
 
 # Static Route
 ## Static Routing
