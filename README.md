@@ -1,3 +1,9 @@
+## This repository is a guide for learn Cisco IOS-XE resources and references to practice configuration Router.
+
+## Summary Of Repository
+
+## Command References
+
 # Basic Configuration
 ## Hostname
 ```
@@ -72,6 +78,13 @@ mpls label protocol ldp
 
 # LACP
 ## LACP
+
+# Static Route
+## Static Routing
+```
+ip route 0.0.0.0 0.0.0.0 [GATEWAY]
+ip route [NETWORK_NEIGHBOR] [PREFIX] [GATEWAY]
+```
 
 # Routing Interior
 ## OSPF (Open Shortest Path First)
@@ -258,4 +271,50 @@ description VPLS_SERVICE
 encapsulation dot1q 444
 rewrite ingress tag pop 1 symmetric
 bridge-domain 444
+```
+
+# Switch Configuration
+## VLAN
+VLAN Configuration
+````
+vlan [VLAN_ID]
+vlan name [VLAN_NAME]
+````
+Interface VLAN
+```
+interface vlan [VLAN_ID]
+description [SERVICE_NAME]
+ip address [IP_ADDRESS] [NETMASK]
+no shutdown
+```
+
+## Static Route
+```
+ip route 0.0.0.0 0.0.0.0 [GATEWAY]
+ip route [NETWORK_NEIGHBOR] [PREFIX] [GATEWAY]
+```
+
+## Port Trunk
+```
+interface GigabitEthernet [PORT_TRUNK]
+description Trunk to 11-CE
+switchport trunk allowed vlan 111,444,666
+switchport trunk encapsulation dot1q
+switchport mode trunk
+mtu 1900
+load-interval 30
+negotiation auto
+spanning-tree bpdufilter enable
+```
+
+## Port Access
+```
+interface GigabitEthernet [PORT_ACCESS]
+description Access to A-CPE
+switchport access vlan 444
+switchport mode access
+mtu 1900
+load-interval 30
+negotiation auto
+spanning-tree bpdufilter enable
 ```
