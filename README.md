@@ -8,6 +8,11 @@
   * [Username and Password](#Username-and-Password)
   * [Privilege Login](#Privilege-Login)
   * [Password-Encryption](#Password-Encryption)
+  * [Time Clock](#Time-Clock)
+  * [Spanning Tree](#Spanning-Tree)
+  * [CDP \(Cisco Discovery Protocol](#CDP-(Cisco-Discovery-Protocol))
+  * [SNMP \(Simple Network Management Protocol)](#SNMP-(Simple-Network-Management-Protocol))
+  * [NTP \(Network Time Protocol)](#Network-Time-Protocol)
 * [Interface](#Interface)
   * [Loopback](#Loopback)
   * [Interface](#Interface)
@@ -99,11 +104,51 @@ line vty 0 4
 login local
 transport input telnet ssh
 transport output telnet ssh
+
+line vty 5 15
+transport input none
+transport output none
 ```
 
 ## Password-Encryption
 ```
 service password-encryption
+```
+## Time Clock
+```
+clock timezone WIB 7 0
+```
+
+## Spanning Tree
+```
+spanning-tree mode mst
+spanning-tree loopguard default
+spanning-tree logging
+spanning-tree extend system-id
+spanning-tree mst 0 priority 4096
+```
+
+## CDP (Cisco Discovery Protocol)
+```
+cdp run
+
+interface Gi1
+cdp enable
+```
+
+## SNMP (Simple Network Management Protocol)
+```
+snmp-server community [SNMP-COMMUNITY]
+snmp-server trap-source Loopback0
+snmp-server location [SITE-ID]
+snmp-server contact [EMAIL@EMAIL.COM]
+snmp-server host [IP_SERVER_SNMP]
+```
+
+## NTP (Network Time Protocol)
+```
+ntp server [IP_SERVER_NTP]
+ntp server [IP_SERVER_NTP]
 ```
 
 # Interface
@@ -147,6 +192,8 @@ Interface MPLS LDP Additional
 interface GigabitEthernet1
 mpls ip
 mpls label protocol ldp
+mpls traffic-eng tunnels
+ip rsvp bandwidth
 ```
 
 # LACP (Link Aggregation Control Protocol)
@@ -199,6 +246,9 @@ nsf cisco
 passive-interface default <- Passive Port
 no passive-interface GigabitEthernet1 <- Active Port
 no passive-interface GigabitEthernet2 <- Active Port
+mpls ldp sync
+mpls traffic-eng router-id Loopback0
+mpls traffic-eng area 262
 ```
 
 # MPLS LDP
@@ -208,6 +258,9 @@ MPLS LDP Configuration
 mpls label protocol ldp
 mpls ldp graceful-restart
 no mpls ldp advertise-labels
+no mpls ip propagate-ttl 
+mpls traffic-eng tunnels
+mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
 mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
 ```
 ## ACL LDP
