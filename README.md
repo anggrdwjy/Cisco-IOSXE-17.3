@@ -9,6 +9,7 @@
   * [Privilege Login](#Privilege-Login)
   * [Password-Encryption](#Password-Encryption)
   * [Time Clock](#Time-Clock)
+  * [FTP \(File Transfer Protocol](#File-Transfer-Protocol)
   * [Spanning Tree Protocol](#Spanning-Tree-Protocol)
   * [CDP \(Cisco Discovery Protocol)](#CDP-(Cisco-Discovery-Protocol))
   * [UDLP (Unidirectional Link Detection) Protocol](#UDLD-(Unidirectional-Link-Detection)-Protocol)
@@ -120,6 +121,13 @@ service password-encryption
 clock timezone WIB 7 0
 ```
 
+## FTP (File Transfer Protocol)
+```
+ip ftp source-interface Loopback0
+ip ftp username [USERNAME]
+ip ftp password 7 [PASSWORD]
+```
+
 ## Spanning Tree Protocol
 ```
 spanning-tree mode mst
@@ -153,6 +161,7 @@ snmp-server host [IP_SERVER_SNMP]
 
 ## NTP (Network Time Protocol)
 ```
+ntp source Loopback0
 ntp server [IP_SERVER_NTP]
 ntp server [IP_SERVER_NTP]
 ```
@@ -225,6 +234,10 @@ channel-group 1 mode active
 ```
 ip route 0.0.0.0 0.0.0.0 [GATEWAY]
 ip route [NETWORK_NEIGHBOR] [PREFIX] [GATEWAY]
+```
+Optional
+```
+ip default-gateway [GATEWAY]
 ```
 
 # Routing Interior
@@ -378,6 +391,7 @@ interface BDI111
 description WAN-111
 ip vrf forwarding WAN-111
 ip address 10.100.0.1 255.255.255.252
+ip address 10.100.1.1 255.255.255.252 secondary
 no shutdown
 ```
 Service Instance
@@ -450,10 +464,13 @@ description Trunk to 11-CE
 switchport trunk allowed vlan 111,444,666
 switchport trunk encapsulation dot1q
 switchport mode trunk
+cdp enable
 mtu 1900
 load-interval 30
 negotiation auto
+udld port disable
 spanning-tree bpdufilter enable
+ip dhcp snooping trust -> Optional
 ```
 
 ## Port Access
@@ -462,10 +479,13 @@ interface GigabitEthernet [PORT_ACCESS]
 description Access to A-CPE
 switchport access vlan 444
 switchport mode access
+cdp enable
 mtu 1900
 load-interval 30
 negotiation auto
+udld port disable
 spanning-tree bpdufilter enable
+ip dhcp snooping trust -> Optional
 ```
 
 # Additional Resources
