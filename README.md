@@ -10,7 +10,7 @@
   * [Password-Encryption](#Password-Encryption)
   * [Time Clock](#Time-Clock)
   * [Spanning Tree Protocol](#Spanning-Tree-Protocol)
-  * [CDP \(Cisco Discovery Protocol](#CDP-(Cisco-Discovery-Protocol))
+  * [CDP \(Cisco Discovery Protocol)](#CDP-(Cisco-Discovery-Protocol))
   * [UDLP (Unidirectional Link Detection) Protocol](#UDLD-(Unidirectional-Link-Detection)-Protocol)
   * [SNMP \(Simple Network Management Protocol)](#SNMP-(Simple-Network-Management-Protocol))
   * [NTP \(Network Time Protocol)](#Network-Time-Protocol)
