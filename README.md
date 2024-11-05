@@ -9,8 +9,9 @@
   * [Privilege Login](#Privilege-Login)
   * [Password-Encryption](#Password-Encryption)
   * [Time Clock](#Time-Clock)
-  * [Spanning Tree](#Spanning-Tree)
+  * [Spanning Tree Protocol](#Spanning-Tree-Protocol)
   * [CDP \(Cisco Discovery Protocol](#CDP-(Cisco-Discovery-Protocol))
+  * [UDLP (Unidirectional Link Detection) Protocol](#UDLD-(Unidirectional-Link-Detection)-Protocol)
   * [SNMP \(Simple Network Management Protocol)](#SNMP-(Simple-Network-Management-Protocol))
   * [NTP \(Network Time Protocol)](#Network-Time-Protocol)
 * [Interface](#Interface)
@@ -119,13 +120,18 @@ service password-encryption
 clock timezone WIB 7 0
 ```
 
-## Spanning Tree
+## Spanning Tree Protocol
 ```
 spanning-tree mode mst
 spanning-tree loopguard default
 spanning-tree logging
 spanning-tree extend system-id
 spanning-tree mst 0 priority 4096
+```
+
+## UDLD (Unidirectional Link Detection) Protocol
+```
+udld enable
 ```
 
 ## CDP (Cisco Discovery Protocol)
