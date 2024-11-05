@@ -266,6 +266,8 @@ mpls ldp graceful-restart
 no mpls ldp advertise-labels
 no mpls ip propagate-ttl 
 mpls traffic-eng tunnels
+xconnect logging pseudowire status
+xconnect logging redundancy
 mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
 mpls ldp neighbor [IP_LOOPBACK_NEIGHBOR] password [PASSWORD]
 ```
